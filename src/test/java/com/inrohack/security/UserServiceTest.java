@@ -29,7 +29,7 @@ public class UserServiceTest {
     PasswordEncoder passwordEncoder;
 
     User user;
-/*
+
     @BeforeEach
     public void setUp() {
         user = new User();
@@ -39,15 +39,15 @@ public class UserServiceTest {
 
         userService.saveUser(user); //el saveUser encripta el password antes de almacenarlo en BBDD
     }
-*/
 
-/*
+
+
     @AfterEach
     public void cleanUp() {
         userRepository.delete(user);
     }
 
-*/
+
 
     @Test
     @DisplayName("Esto será un test")
@@ -58,12 +58,23 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Password encription is ok")
-    public void passwordIsCorrectTest() {
+    public void passwordIEncription() {
         Optional<User> userOptional = userService.getByUsername("usertest");
         User user= userOptional.get();
         assertTrue (user.getPassword().startsWith("$2a$"));
         System.out.println("Password is ok");
     }
+
+    @Test
+    @DisplayName("Password is correct")
+    public void passwordIsCorrect() {
+       boolean isCorrect=userService.checkPasword(user,"1234");
+       assertTrue(isCorrect);
+       System.out.println("Password is correct?  " + isCorrect);
+
+
+    }
+
 
 
 }
