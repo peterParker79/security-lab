@@ -18,7 +18,7 @@ public class SecurityConfig {
         http
                 // aqui indicamos que rutas tienen acceso sin autenticación y con auth.
                 .authorizeHttpRequests( authz ->authz
-                        .requestMatchers("public/**").permitAll()
+                        .requestMatchers("/api/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // El tipo de autenticación: básica http
