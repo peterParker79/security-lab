@@ -1,5 +1,6 @@
 package com.inrohack.security.controllers;
 
+import com.inrohack.security.models.ERole;
 import com.inrohack.security.models.User;
 import com.inrohack.security.services.JwtService;
 import com.inrohack.security.services.UserService;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.jar.JarEntry;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -29,7 +32,11 @@ public class AuthController {
                 User foundUser = optionalUser.get();
 
                 if (userService.checkPasword(foundUser, user.getPassword())){
-                String token = jwtService.generateToken(foundUser.getUsername(), foundUser.getRoles().toString());
+                    List<ERole> rolesNames= foundUser.getRoles().stream()
+                            .map(role -> role.getName())
+                            .collect(Collectors.toList());
+
+                    String token = jwtService.generateToken(foundUser.getUsername(), rolesNames.toString());
                 return ResponseEntity.ok(token);
                 }else{
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed.");
