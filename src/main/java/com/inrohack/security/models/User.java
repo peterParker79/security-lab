@@ -18,12 +18,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String username;
     private String password;
 
     @ManyToMany (fetch=FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private Collection<Role> roles = new ArrayList<>(); //un usuario múltiples roles
 
 
 

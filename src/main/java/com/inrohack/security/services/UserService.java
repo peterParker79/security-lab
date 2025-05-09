@@ -26,10 +26,10 @@ public class UserService {
     }
 
     public Optional<User> getByUsername(String username){
-        return userRepository.findUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
-    // Compara el password descifrando el almacenado en la BBDD
+    // Compara el password descifrando el almacenado en la BBDD usado en el proceso de login
     public boolean checkPasword(User user, String password) {
         return passwordEncoder.matches(password, user.getPassword());
     }
