@@ -1,4 +1,5 @@
 # Spring Security Lab
+Documentación en resources/doc
 
 En este lab vamos a crear una aplicación Spring Boot con Spring Security y JWT. Aplicaremos los conceptos de autenticación y autorización que hemos aprendido en clase.
 
