@@ -1,5 +1,7 @@
 package com.inrohack.security;
 
+import com.inrohack.security.models.ERole;
+import com.inrohack.security.models.Role;
 import com.inrohack.security.models.User;
 import com.inrohack.security.repositories.UserRepository;
 import com.inrohack.security.services.UserService;
@@ -12,7 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -33,20 +39,19 @@ public class UserServiceTest {
     @BeforeEach
     public void setUp() {
         user = new User();
-        user.setUsername("usertest");
+        user.setUsername("test");
         user.setPassword("1234");
         System.out.println("El usuario inicial es: " + user);
-
         userService.saveUser(user); //el saveUser encripta el password antes de almacenarlo en BBDD
     }
 
 
-
+    /*
     @AfterEach
     public void cleanUp() {
         userRepository.delete(user);
     }
-
+*/
 
 
     @Test
@@ -55,6 +60,7 @@ public class UserServiceTest {
     public void test() {
         System.out.println("Creating users with pass encrypted");
     }
+
 
     @Test
     @DisplayName("Password encription is ok")

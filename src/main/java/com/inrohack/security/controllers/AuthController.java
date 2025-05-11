@@ -26,7 +26,7 @@ public class AuthController {
     private JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity <String> login (@RequestBody User user){
+    public ResponseEntity<String> login (@RequestBody User user){
         Optional<User> optionalUser = userService.getByUsername(user.getUsername());
             if (optionalUser.isPresent()){
                 User foundUser = optionalUser.get();

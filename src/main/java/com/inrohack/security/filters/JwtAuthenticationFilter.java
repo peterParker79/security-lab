@@ -30,8 +30,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     /*
     Filtro que mira los header de la request
-    Comprueba que tenemos un header de aturorizació con Bearer.
-    Extrae el token del hader.
+    Comprueba que tenemos un header de 'Aturorization' con Bearer.
+
+    Extrae el token del header.
     Estrae usuario y roles
     Métodos Granted -> de los roles del string roles genera las Autoridades para Spring Sec
     Mete estos roles en el conexto de la app para aplicar la reguridad a los endpoints
@@ -45,6 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Es obligatorio que no sea nulo y que empiece con Bearer
         // Si no lo cumple se pasa al siguiente filtro...
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //added to return 401
+           // response.getWriter().write("Missing token");
             filterChain.doFilter(request, response);
             return;// para que no ejecute el resto del código
         }
@@ -54,7 +57,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Validate the token
         if (!jwtService.validateToken(token)) {
-            filterChain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //added
+            response.getWriter().write("Invalid token"); //added
+            //filterChain.doFilter(request, response);
             return;
         }
 

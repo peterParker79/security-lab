@@ -12,12 +12,16 @@ public class BasicController {
 
     @GetMapping("public/users")
     public ResponseEntity<String> publicUsers(){
-        return ResponseEntity.ok("Acceso a public. Es de acceso publico");
+        return ResponseEntity.ok(
+                "Acceso a public. Es de acceso publico\n"+
+                "No se requiere autenticación"
+        );
     }
 
     @GetMapping("/admin")
     public ResponseEntity<String> admin(){
-        return ResponseEntity.ok("Acceso a admin. Es de acceso administrador");
+        return ResponseEntity.ok(
+                "Acceso a admin.\nEs de acceso exlusivo administradores");
     }
 
 
